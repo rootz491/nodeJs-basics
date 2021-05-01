@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+nav {
+    padding: 1em;
+    font-size: 2em;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+footer {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}

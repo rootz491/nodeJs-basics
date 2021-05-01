@@ -1,0 +1,29 @@
+.content {
+    display: grid;
+    place-content: center;
+}
+
+
+.intro {
+    font-size: 3em;
+    letter-spacing: .5em;
+    color: darkblue;
+}
+
+.sub {
+    color: darkslategray;
+    place-self: center;
+    font-size: 2em;
+}
+
+.demo {
+    padding: 2em;
+    min-width: 50%;
+    margin: auto;
+    margin-top: 3em;
+    text-align: center;
+}
+
+.demo > * {
+    color: darkolivegreen;
+}

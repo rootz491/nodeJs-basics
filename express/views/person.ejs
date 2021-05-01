@@ -1,0 +1,18 @@
+<%- include('header'); -%>
+
+
+<div class="content">
+    <p><strong>name :</strong> <%= name %></p>
+    <p><strong>age: </strong> <%= data.age %></p>
+    <p><strong>job: </strong> <%= data.job %></p>
+    <p><strong>address: </strong> <%= data.address %></p>
+
+    <p><strong>Hobbies</strong>
+        <% data.hobby.forEach(hobby => { %>
+            <div><%= hobby %></div>
+        <% }) %>
+    </p>
+
+</div>
+
+<%- include('footer'); -%>
