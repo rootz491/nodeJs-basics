@@ -1,5 +1,10 @@
 .content {
     width: 70%;
     margin: auto;
-    background: green;
+
+}
+
+p {
+    font-size: 1.5em;
+    margin-bottom: 1em;
 }

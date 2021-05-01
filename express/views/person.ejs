@@ -1,16 +1,18 @@
 <%- include('header'); -%>
 
-<link rel="stylesheet" href="css/profile.css">
+<link rel="stylesheet" href="../css/person.css"> 
 <div class="content">
-    <p><strong>name :</strong> <%= name %></p>
-    <p><strong>age: </strong> <%= data.age %></p>
-    <p><strong>job: </strong> <%= data.job %></p>
-    <p><strong>address: </strong> <%= data.address %></p>
+    <p><strong>name :</strong> <span><%= name %></span></p>
+    <p><strong>age: </strong> <span><%= data.age %></span></p>
+    <p><strong>job: </strong> <span><%= data.job %></span></p>
+    <p><strong>address: </strong> <span><%= data.address %></span></p>
 
     <p><strong>Hobbies</strong>
+        <div>
         <% data.hobby.forEach(hobby => { %>
-            <div><%= hobby %></div>
+            <p><%= hobby %></p>
         <% }) %>
+        </div>
     </p>
 
 </div>
