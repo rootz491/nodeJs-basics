@@ -46,7 +46,11 @@ const app = express();
 //  adding ejs as template engine
 app.set("view engine", "ejs");
 //  middleware & static files
-app.use('/css', express.static('css'));
+app.use('/css',express.static('css'));
+// //  handling 404         why the fuck is that!
+// app.use((req, res) => {
+//     res.status(404).sendFile(__dirname + '/html/404.html');
+// })
 
 
 //  sending dynamic EJS files
