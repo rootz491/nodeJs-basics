@@ -1,11 +1,12 @@
 const task = document.querySelector("form");
 const url = '/todo'
 
+//  trigger to make POST req to create new task
 task.addEventListener("submit", ee => {
     ee.preventDefault();
 
-    const item = {item: document.querySelector('#item').value};
-
+    const value = document.querySelector('#item').value;
+    const item = {item: value};
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -17,8 +18,23 @@ task.addEventListener("submit", ee => {
     xhr.send(JSON.stringify(item));
 
     console.log(item);
+    //  making dom element for newly created element
+    createNewTask(value);
 });
 
 let createNewTask = data => {
+    //  create dom element
+    const keeper = document.querySelector('#taskKeeper');
 
+    let template = document.querySelector('template');
+    let clone = template.content.cloneNode(true);
+
+    let item = clone.querySelector('#string');
+    item.innerText = data;
+
+    keeper.appendChild(clone);
 }
+
+/*
+    make a handler so user can DELETE tasks
+*/

@@ -17,8 +17,9 @@ module.exports = app => {
         res.json(data);
     });
     
-    // app.delete('/todo', (req, res) => {
-
-    // });
+    app.delete('/todo/:item', (req, res) => {
+        data.filter(item => item.replace(/ /g, '-') == req.params.item);
+        res.json(data);
+    });
 
 }

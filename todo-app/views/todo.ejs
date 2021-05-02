@@ -41,13 +41,13 @@
                     <template>
                         <div class="border px-4 py-2 my-2 flex justify-between">
                             <p id="string"></p>
-                            <a href="/delete">❌</a>
+                            <span>❌</span>
                         </div>
                     </template>
                     <% tasks.forEach(task => { %>
                     <div class="border px-4 py-2 my-2 flex justify-between">
                         <p><%= task.item %></p>
-                        <a href="/delete">❌</a>
+                        <span>❌</span>
                     </div>
                     <% }); %>
                 </div>
