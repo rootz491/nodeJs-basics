@@ -1,0 +1,29 @@
+.content {
+    width: 50%;
+    margin: 2em auto;
+
+}
+
+.content > h1 {
+    font-size: 2em;
+    color: red;
+}
+
+.message {
+    border-radius: 10px;
+    margin: 1em 0;
+    padding: 2em;
+    background: lightgrey;
+    white-space: pre-wrap;
+}
+
+#res {
+    margin-top: 2em;
+}
+
+#expert a {
+    color: purple;
+    padding: 1px 8px;
+    background-color: lightgrey;
+    border-radius: 3px;
+}

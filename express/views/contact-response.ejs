@@ -1,0 +1,17 @@
+<%- include('header'); -%>
+
+<link rel="stylesheet" href="../css/response.css"> 
+<div class="content">
+    
+    <h1>Dear <span><%= data.name %></span>, Thankyou for your input!</h1>
+    <h3>We'll get to you soon ~</h3>
+
+    <div id="res">
+        <p>Your message: </p>
+        <p class="message"><%= data.message %></p>
+        <p>has been forwarded to <span id="expert"><a href="/contact?expert=<%= data.expert %>">@<%= data.expert %></a></span>.</p>
+    </div>
+
+</div>
+
+<%- include('footer'); -%>

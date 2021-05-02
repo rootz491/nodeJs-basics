@@ -1,7 +1,7 @@
 .content {
     width: 70%;
     margin: auto;
-    margin-top: 4em;
+    margin-top: 2em;
 }
 
 #heading {
@@ -16,4 +16,31 @@
 .content > div {
     display: grid;
     gap: .5em;
+}
+
+
+.contact-form {
+    padding: 2em 0;
+}
+
+.contact-form > h1 {
+    color: red;
+    font-size: 2em;
+}
+
+form, form > div {
+    display: grid;
+    gap: .5em;
+}
+
+input, textarea, select, button {
+    padding: 4px;
+    border: 1px solid black;
+}
+
+button {
+    padding: 1em .2em;
+    width: 150px;
+    margin: auto;
+    background-color: none;
 }
