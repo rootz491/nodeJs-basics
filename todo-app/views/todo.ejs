@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/assets/tailwind.css">
+    <script defer src="/assets/stuff.js"></script>
+    <title>ToDo app</title>
+
+</head>
+<body>
+    
+    <div class="container mx-auto">
+        <header class="p-4 bg-blue-200 flex justify-between">
+            <a href="/" class="text-blue-700 font-14">To-Do</a>
+            <a href="#about">about</a>
+        </header>
+
+        <div class="mx-3 mt-14 md:flex md:justify-around grid place-center gap-8">
+
+            <div class="p-2 w-100 md:w-1/3 py-8 border border-black rounded-sm">
+                <h1 class="text-center text-red-400 mb-8 text-2xl font-extrabold">create</h1>
+                <div>
+                    <form action="/todo" method="POST" class="m-auto">
+                        <div class="flex justify-around">
+                            <label for="task">Task</label>
+                            <input id="item" name="item" type="text" required class="border">
+                        </div>
+                        <div class="flex mt-8">
+                            <button class="mx-auto border px-4 py-1 rounded-sm hover:bg-blue-200 duration-300" type="submit">create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="p-2 w-100 md:w-1/3 py-8 border border-black rounded-sm">
+                <h1 class="text-center text-red-400 mb-8 text-2xl font-extrabold">List</h1>
+                <div id="taskKeeper">
+                    <template>
+                        <div class="border px-4 py-2 my-2 flex justify-between">
+                            <p id="string"></p>
+                            <a href="/delete">❌</a>
+                        </div>
+                    </template>
+                    <% tasks.forEach(task => { %>
+                    <div class="border px-4 py-2 my-2 flex justify-between">
+                        <p><%= task.item %></p>
+                        <a href="/delete">❌</a>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
