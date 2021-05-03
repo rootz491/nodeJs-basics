@@ -6,20 +6,26 @@ task.addEventListener("submit", ee => {
     ee.preventDefault();
 
     const value = document.querySelector('#item').value;
-    const item = {item: value};
+    // const item = {item: value};
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onload = function(e) {
-        let res = xhr.response;
-        console.log(res);
-    };
-    xhr.send(JSON.stringify(item));
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    // xhr.onload = function(e) {
+    //     let res = xhr.response;
+    //     console.log(value)
+    //     console.log(res);
+    // }
+    // xhr.send("item", value);
 
-    console.log(item);
+
+    axios.post('/todo', ("item", value))
+    .then(res => {
+        console.log(res.data);
+    })
+
     //  making dom element for newly created element
-    createNewTask(value);
+    // createNewTask(value);
 });
 
 let createNewTask = data => {
@@ -29,8 +35,8 @@ let createNewTask = data => {
     let template = document.querySelector('template');
     let clone = template.content.cloneNode(true);
 
-    let item = clone.querySelector('#string');
-    item.innerText = data;
+    let thing = clone.querySelector('#string');
+    thing.innerText = data;
 
     keeper.appendChild(clone);
 }

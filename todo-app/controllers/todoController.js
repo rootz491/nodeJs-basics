@@ -5,6 +5,7 @@ const urlEncodedParser = bodyParser.urlencoded({extended: false});
 const jsonParser = bodyParser.json();
 
 module.exports = app => {
+    
 
     app.get('/todo', (req, res) => {
         res.render('todo', {tasks: data});
@@ -13,8 +14,7 @@ module.exports = app => {
     app.post('/todo', urlEncodedParser, (req, res) => {
         data.push(req.body);
         console.log(req.body);
-        // res.render('todo', {tasks: data});
-        res.json(data);
+        res.json(req.body);
     });
     
     app.delete('/todo/:item', (req, res) => {

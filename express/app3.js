@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 const obj = {
     "karan": {
-        age: 27,
+        age: "NaN",
         job: "Bug buunty hunter",
         address: "1337",
         hobby: [
