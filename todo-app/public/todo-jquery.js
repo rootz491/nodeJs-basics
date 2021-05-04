@@ -1,4 +1,4 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
     $('form').on('submit', function(){
   
@@ -11,8 +11,8 @@ $(document).ready(function(){
           data: todo,
           success: function(data){
             //  create dom element for newly created task
-            console.log(data.item)
-            createNewTask(data.item)
+            console.log(data)
+            createNewTask(data)
           }
         });
   
@@ -20,32 +20,45 @@ $(document).ready(function(){
   
     });
   
-    $('li').on('click', function(){
-        var item = $(this).text().replace(/ /g, "-");
+    $('span').on('click', function(){
+        var item_id = $(this).attr('id');
+        console.log(item_id, "deleted");
         $.ajax({
           type: 'DELETE',
-          url: '/todo/' + item,
+          url: '/todo/' + item_id,
           success: function(data){
-            //do something with the data via front-end framework
-            location.reload();
+            //  delete that task from UI
+            deleteTask(item_id);
           }
         });
     });
   
-  });
+  // });
 
 
 
 
+  //  create dom element
   let createNewTask = data => {
-    //  create dom element
     const keeper = document.querySelector('#taskKeeper');
 
     let template = document.querySelector('template');
     let clone = template.content.cloneNode(true);
 
     let thing = clone.querySelector('#string');
-    thing.innerText = data;
+    thing.innerText = data.item;
+
+    let span = clone.querySelector('span');
+    span.id = data._id;
 
     keeper.appendChild(clone);
+    
+    // span.addEventListener('click', deleteTask(data._id));
+
+    // span.onclick = deleteTask(data._id);
+}
+
+//  delete dom element
+let deleteTask = id => {
+  document.getElementById(id).parentElement.remove();
 }

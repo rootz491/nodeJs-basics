@@ -6,26 +6,25 @@ task.addEventListener("submit", ee => {
     ee.preventDefault();
 
     const value = document.querySelector('#item').value;
-    // const item = {item: value};
 
-    // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", url, true);
-    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-    // xhr.onload = function(e) {
-    //     let res = xhr.response;
-    //     console.log(value)
-    //     console.log(res);
-    // }
-    // xhr.send("item", value);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.onload = function(e) {
+        let res = xhr.response;
+        console.log(value)
+        console.log(res);
+    }
+    xhr.send(JSON.stringify(value, value));
 
 
-    axios.post('/todo', ("item", value))
-    .then(res => {
-        console.log(res.data);
-    })
+    // axios.post('/todo', ("item" = value))
+    // .then(res => {
+    //     console.log(res.data);
+    // })
 
     //  making dom element for newly created element
-    // createNewTask(value);
+    createNewTask(value);
 });
 
 let createNewTask = data => {
