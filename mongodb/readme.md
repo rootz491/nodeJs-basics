@@ -1,7 +1,7 @@
 #   mongoDB
 
 
-##  SHELL - mongoDB terminal
+# SHELL - mongoDB terminal
 
 ###  importing data
 ```shell
@@ -22,7 +22,7 @@ mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.
 mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
 ```
 
-###   connect to DB
+###   select a DB
 ```shell
 $   show dbs
 $   use <db-name>
@@ -141,7 +141,7 @@ $   db.test.deleteMany( {"test": 4} )
 db.collection-name.drop()
 ```
 
-###     complex queries:
+##     complex queries:
 
 *   to make more complex queries like **greater than or equals to** or **less than** you can use **comparison operator** like `$gte` or `$lt`.
 
@@ -153,4 +153,128 @@ db.india.find( { "type": "state", "population": { "$lt": 180000 } } )
 *   What is the difference between the number of people born in 1998 and the number of people born after 1998 in the sample_training.trips collection?
 ```shell
 db.trips.find({"birth year": {"$gt": 1998} }).count() - db.trips.find({"birth year": 1998}).count()
+```
+
+###  logical queries
+
+*   there are 4 logical operator, i.e. `$and`, `$or`, `$nor` & `$not`.
+
+*   syntax for **and**, **or** & **nor**:
+```shell
+db.collection-name.find( {"$operator": [ <clause_1>, <clause_2>, ... ]} )
+```
+
+*   syntax for **not** operator:
+```shell
+db.collection_name.find( {"$not": {<key-value-pairs>} } )
+```
+
+*   `and` operator is default when making queries & normally used if you wanna make a query where you want to same operator multiple times, to join them.
+```shell
+db.collection_name.find( {"$and": [ {"$or": [<clause_1>, ...]}, {"$or": [<clause_1>, ...]} ] } )
+```
+
+>   find which `student_id` are greater than `25` & less than `100` in `grades` collection.
+
+```shell
+db.grades.find( {"$and": [{"student_id": {"$gt": 25}}, {"student_id": {"$lt": 100}}] } )
+# OR
+db.grades.find( { "id": {"$gt": 25, "$lt": 100} } )
+```
+
+*   find all document with dont have values `1` or `2` in field `test` on `practice` collection.
+```shell
+db.practice.find( {"$nor": [{"test": 1}, {"test": 2}]} )
+```
+
+*   How many businesses in the sample_training.inspections dataset have the inspection result "Out of Business" and belong to the Home Improvement Contractor - 100 sector?
+```shell
+db.inspections.find( {"$and": [ {"result": "Out of Business", "sector": "Home Improvement Contractor - 100"} ]} ).count()
+#   OR
+db.inspections.find( {"result": "Out of Business", "sector": "Home Improvement Contractor - 100"} ).count()
+```
+
+*   How many companies in the sample_training.companies dataset were either founded in 2004, or in the month of October and either have the social category_code or web category_code?
+```shell
+db.companies.find( {"$and": [
+    {"$or": [{"founded_year": 2004}, {"founded_month":  10}]}, 
+    {"$or": [{"category_code": "social"}, {"category_code": "web"}]}
+    ]} 
+).count()
+```
+
+###     expressive operator
+
+*   there is this `expr` opeartor which allows us to compare b/w field value within a document among all documents.
+
+*   find all shapes whose **width** and **height** is equal.
+    ```shell
+    db.shapes.find( {"$expr": {"$eq": ["$width", "$height"]}} )
+    ```
+    *   here `$expr` is operator which tell we are comparing with-in a document, among documents.
+    *   `$eq` is that we are checking if fields are equal or not.
+    *   we select the field using same `$` dollar symbol as we do with operators means `$widht` will be replaced with **value** of field `width` when comparing with other number/filds.
+
+*   find all shapes whose **sides** are greater than `5` and **width** and **height** is equal.
+    ```shell
+    db.shapes.find( {"$expr": {"$and": [ 
+            {"$eq": ["$width", "$height"]}, 
+            {"$gt": ["$sides", 5]} 
+        ]} 
+    })
+    ```
+    *   using `expr`, we can compare field[s] within a document but if we want to do multiple different comparisons, we can use `and` operator also.
+
+*   How many companies in the sample_training.companies collection have the same permalink as their twitter_username?
+```shell
+db.companies.find( {"$expr": {"$eq": ["$permalink", "$twitter_username"]}} ).count()
+```
+
+###     array operator
+
+*   if we want to find some document acc. to it's array field value, then we use this operators;
+
+*   find all state where `food` array-field have **atleast** `french`, `chinese`, `korean`, `punjabi` and `italian` and `size` of food array should be less than `10`.
+    ```shell
+    db.states.find( { "food": {"$size": {"$lt": 10}, `$all`: ["french", "chinese", "korean", "punjabi", "italian"]} } )
+    ```
+    *   `$size` operator will compare size of array with given number
+    *   `$all` operator will check which arrays have atleast all these values i.e. `["french", "chinese", "korean", "punjabi", "italian"]`.
+
+*   Using the sample_airbnb.listingsAndReviews collection find out how many documents have the "property_type" "House", and include "Changing table" as one of the "amenities"?
+```shell
+db.listingsAndReviews.find( {"property_type": "House", "amenities": {"$all": ["Changing table"]}} ).count()
+```
+
+###    projection
+
+*   if you're dealing with a doing that have many extra fields that you dont need at the moment, then you can use `projection` to specify which fields you want or don't want to fetch if querying condition meets.
+
+    ```shell
+    db.listingsAndReviews.find({ "amenities": { "$size": 20, "$all": [ "Internet", "Wifi",  "Kitchen" ] } }, {"price": 1, "address": 1}).pretty()
+    ```
+
+    *   second argument of find function is another key-value pair (object) with this syntax
+    ```shell
+    find( {"conditions": true}, {"field": 1} )
+    #   OR
+    find( {"conditions": true}, {"field": 0} )
+    ``` 
+    *   `'field': 0` means you dont want to fetch specified fields.
+    *   `'field': 1` means you want to fetch specified fields.
+    *   you cannot use both `0` & `1` together except when you dont want `_id` field because by-default it will be fetched with resulting documents!
+
+
+###     elemMatch operator
+
+*   check if array has exactly given object (key-value_pair) or not!
+
+*   Find all documents where the student had an `extra credit` score
+```shell
+db.grades.find({ "scores": { "$elemMatch": { "type": "extra credit" } }}).pretty()
+```
+
+*   Find all documents where the student in class 431 received a grade higher than 85 for any type of assignment
+```shell
+db.grades.find({ "class_id": 431 }, { "scores": { "$elemMatch": { "score": { "$gt": 85 } } }}).pretty()
 ```
