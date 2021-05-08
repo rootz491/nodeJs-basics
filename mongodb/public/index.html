@@ -8,24 +8,40 @@
     <link rel="stylesheet" href="assets/tailwind.css">
     <!-- <script defer src="assets/xhr.js"></script> -->
     <!-- <script defer src="assets/fetch.js"></script> -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
-    <script defer src="assets/axios.js"></script>
+    <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script> -->
+    <!-- <script defer src="assets/axios.js"></script> -->
+
+    <script src="assets/loadData.js"></script>
 
     <title>practice mongoDB</title>
 </head>
 <body>
-    <div class="container mx-auto bg-gray-200 h-96 p-20 grid place-center">
+    <div class="container mx-auto p-20 grid place-center">
 
-        <div class="w-64 mx-auto bg-gray-100 border border-gray-400">
+        <div class="w-94 mx-auto bg-gray-100 border border-gray-400">
             <form name="person" action="/" method="POST" class="p-4 grid gap-4">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" class="px-2 py-1" required>
-                <label for="age">Age</label>
-                <input type="number" name="age" id="age" class="px-2 py-1" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="px-2 py-1" required>
+                <label for="message">Message</label>
+                <textarea name="message" id="message" cols="30" rows="5" required></textarea>
                 <div class="flex">
                     <button class="mx-auto border-2 border-black rounded px-2 py-1" type="submit" >submit</button>
                 </div>
             </form>
+        </div>
+
+        <div id="display" class="my-16 h-48 bg-gray-100 space-y-2">
+            <template>
+                <div class="p-4 w- space-y-2">
+                    <div class="flex justify-between">
+                        <p id="name">karan</p>
+                        <p id="email">karansh491@gmail.com</p>
+                    </div>
+                    <p id="message" style="white-space: pre-wrap;"></p>
+                </div>
+            </template>
         </div>
 
     </div>
