@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+header a {
+  color: #00B7FF;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4em;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+  min-height: 70vh;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    width: 100%;
+  }
+  body {
+    padding: 50px 20px;
+  }
+}

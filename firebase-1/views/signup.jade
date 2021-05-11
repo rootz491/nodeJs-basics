@@ -1,0 +1,11 @@
+extends layout
+
+block files 
+    script(src="javascripts/firebase.js") 
+    script(src="javascripts/login.js") 
+
+block content
+    h1= title 
+    form(action="/signupSession", method="post"):   input#email(type="email", name="email", required)
+                                                    input#pasword(type="password", name="password", required)
+                                                    input(type="submit", value="signup")

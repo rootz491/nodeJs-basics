@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    
+    script(src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js")
+    script(src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js")
+    script(src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js")
+    script(src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js")
+    
+    script(src="/javascripts/firebase.js")
+
+    
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    block files
+  body
+    header: a(href="/") home
+            a(href="/user") user  
+            a(href="/about") about
+  
+    div(class="container"): block content
