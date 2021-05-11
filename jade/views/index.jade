@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  
+  div(class='md:w-2/3 m-auto md:border border-gray-200 px-4 py-8 m-2 rounded space-y-4')
+    h1(class = 'text-center text-xl')= title
+    img(src="/images/ninja-dog.jpeg", alt="ninja dog" class='md:w-1/2 w-2/3 m-auto')
+    p(class=[
+      'font-thin',
+      'text-base',
+      'text-black',
+      'text-center'
+    ]) Welcome to jade template app
+
+  div(class='grid sm:grid-cols-2 place-items-center gap-16 m-8')
+    div(class='text-light bg-purple-100 px-8 py-4 rounded-2xl border-2 border-purple-400 sm:text-center md:w-1/2 md:h-24')
+      p Lots of memes 🔥
+    div(class='text-light bg-purple-100 px-8 py-4 rounded-2xl border-2 border-purple-400 sm:text-center md:w-1/2 md:h-24')
+      p Profit and fun things 😎
+
+
+
