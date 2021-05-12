@@ -1,0 +1,30 @@
+extends layout 
+
+block content 
+  div(class='px-8 my-4')
+    h1(class='text-center font-bold bg-red-200 border-2 border-red-400 text-xl mb-2 sm:w-2/3 m-auto')= title 
+    ul(class='text-center sm:w-2/3 space-y-2 mx-auto') 
+      each i in agents 
+        li(class='bg-red-100 px-4 py-2')= i
+  
+  .grid.space-x-4.p-4(class='md:grid-cols-2 grid-cols-1') 
+    form.grid.gap-2.my-16.mx-auto(action="/contact", method="post") 
+      h1.text-2xl.font-bold.text-center form
+      label(for="name") Name 
+      input.px-4.py-1#name(name="name", placeholder="your name", required)
+      label(for="email") Email 
+      input.px-4.py-1#email(type="email", name="email", placeholder="hello@world.com", required)
+      label(for="to") Contact to
+      select#agent(name="agent", default='sudi', required)
+        option(value="sudi")  sudi 
+        option(value="nik") nik 
+        option(value="karan") karan 
+      label(for="message") message 
+      textarea.px-4.py-1#message(name="message", cols="30", rows="5", required) 
+      .flex: button.border.border-black.mx-auto.px-4.py-1.rounded(type="submit", class="hover:bg-blue-200 hover:text-white") send 
+
+    div(class='self-center m-auto my-4') 
+      img(class='w-full', src="/images/gojo-bw.jpeg", alt="gojo calling")
+
+      
+    

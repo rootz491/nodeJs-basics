@@ -1,2 +1,8 @@
 extends layout 
 
+block content 
+  h1(class='text-center font-bold text-4xl') Import markdowns
+  div(class='sm:w-2/3 mx-auto my-8 border text-gray-500 px-8 py-4')
+    include:markdown ./includes/info.md
+  div(class='w-2/3 sm:w-1/2 mx-auto')
+    img(src="/images/good-question.jpeg", alt="question")

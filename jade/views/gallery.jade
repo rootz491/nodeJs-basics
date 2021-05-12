@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+  h1(class = 'text-center text-4xl font-bold p-4')= title
+  div(class=[
+    'grid',
+    'md:grid-cols-3',
+    'gap-2',
+    'p-2'
+  ]) 
+    .bg-gray-200.border.border-black(class='md:row-span-2 md:col-span-2') 
+      img.w-full(src="/images/hacking-suck.jpeg", alt="1337" class='m-auto')
+    .bg-gray-200.border.border-black: img.w-full(src="/images/me-side.jpeg", alt="mee" class='m-auto')
+    .bg-gray-200.border.border-black: img.w-full(src="/images/meme.jpeg", alt="meme" class='m-auto')
+    .bg-gray-200.border.border-black: img.w-full(src="/images/me-back.jpeg", alt="me" class='m-auto')
+    .bg-gray-200.border.border-black: img.w-full(src="/images/fool.jpeg", alt="jujutsu kaisen" class='m-auto')
+    .bg-gray-200.border.border-black: img.w-full(src="/images/karan.jpg", alt="karan" class='m-auto')

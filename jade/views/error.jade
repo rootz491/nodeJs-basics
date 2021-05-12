@@ -1,6 +1,6 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
+  h1(class='text-center text-xl font-extrabold')= message
+  h2(class='text-center text-base font-thin')= error.status
   pre(class='text-sm overflow-ellipsis') #{error.stack}
