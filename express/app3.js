@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mailSender = require("./nodemailer_service");
+require('dotenv').config()
 
 const obj = {
     "karan": {
@@ -42,6 +44,10 @@ const anon = {
     address: "null"
 }
 
+
+
+
+
 const app = express();
 
 const urlEncodedParser = bodyParser.urlencoded({extended: false})
@@ -76,6 +82,14 @@ app.get('/contact', (req, res) => {
 //  handling POST request
 app.post('/contact', urlEncodedParser, (req, res) => {
     console.log(`To ${req.body.expert}-\n${req.body.name}: ${req.body.email}\n${req.body.message}`);
+
+    let message = `This mail is sent from Express application\n\nmessage:\n${req.body.message}`;
+    let reciever = `experimentyt1@gmail.com`;
+    
+    let isSent = mailSender(req.body.email, reciever, `Express app -> message from ${req.body.name}`, message);
+
+    console.log(`is mail sent [${isSent}] to address: ${process.env.EMAIL}`);
+    
     res.render('contact-response', {data: req.body});
 });
 
@@ -93,3 +107,4 @@ app.get('/person/:name', (req, res) => {
 
 //  create a listener on given port
 app.listen(3000);
+console.log('server is running on http://localhost:3000');
