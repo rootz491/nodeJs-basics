@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    script(src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js") 
+    script(src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js") 
+    script(src="/static/js/firebase.js") 
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js", integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==", defer, crossorigin="anonymous")
+    block files
+    link(rel='stylesheet', href='/static/css/tailwind.css')
+  body
+    .container(class=[
+      'mx-auto',
+      'py-8', 
+      'lg:w-2/3',
+      'h-screen',
+      'max-h-full',
+      'bg-purple-100'
+    ])
+
+      block content

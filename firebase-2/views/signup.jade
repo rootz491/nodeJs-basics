@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+    form.mx-auto.grid.gap-2(action="/user/auth/signup", method='POST')
+        label(for="firstName") First Name 
+        input.px-2.py-1#firstName(type="text", name="firstName", placeholder="ex. Alex")
+        label(for="lastName") Last Name 
+        input.px-2.py-1#lastName(type="text", name="lastName", placeholder="ex. Smith")
+        label(for="email") Email 
+        input.px-2.py-1#email(type="email", name="email", placeholder="ex. alex12smith@gmail.com")
+        label(for="password") Password 
+        input.px-2.py-1#password(type="password", name="password")
+        .flex 
+            button.mx-auto(type="submit") sign up

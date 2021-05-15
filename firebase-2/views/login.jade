@@ -1,0 +1,16 @@
+extends layout 
+
+block files 
+    script(src="/static/js/login.js", defer, type="module") 
+
+block content 
+
+    form.mx-auto.grid.gap-2.p-2(action="/user/auth/login", method='POST', class="md:w-62")
+        label(for="email") Email 
+        input#email(type="email", name="email")
+        label(for="password") Password 
+        input#password(type="password", name="password")
+        .flex 
+            button.mx-auto(type="submit") login
+
+    div.text-center(class='w-1/2')= error 
