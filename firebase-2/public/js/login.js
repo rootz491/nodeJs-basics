@@ -1,4 +1,4 @@
-
+import { makeRequest } from '/static/js/baseFunctions.js'
 
 document.addEventListener('submit', e => {
     e.preventDefault();
@@ -9,35 +9,37 @@ document.addEventListener('submit', e => {
     //  make req to auth server
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then( _ => {
-       
-        //  it will get IdToken, 
-        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-            //  attach to header, and send req to backend.
-            axios.post(window.location.href, {}, {
-                headers: { 'Authorization': `Bearer ${idToken}` } 
-            })  
-                .then(res => res.data)
-                .then(data => {
-                    if (data.login === true) {
-                        // window.location.replace( window.location.origin + '/app' );
-                        //  redirect to index
-                        alert('login successful');
-                    }
-                    else {
-                        e.target.email.value = null;
-                        e.target.password.value = null;
-                        alert('please try again');
-                    }
-                })
-                .catch(err => console.log(err));
-        })
-        .catch((error) => {
-            //  error
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-        });
 
-    });
+            makeRequest('/user/auth/login', 'post', () => {
+                window.location = `${window.location.origin}/app`;
+            });
+
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+});
+
+
+//  if user's already logged in, 
+//      then redirect to home page
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        window.location = `${window.location.origin}/app`
+    }
+});
+
+
+
+document.getElementById('googleAuth').addEventListener('click', e => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+            window.location = `${window.location.origin}/app`
+        });
 
 });

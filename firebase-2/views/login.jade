@@ -5,12 +5,19 @@ block files
 
 block content 
 
-    form.mx-auto.grid.gap-2.p-2(action="/user/auth/login", method='POST', class="md:w-62")
-        label(for="email") Email 
-        input#email(type="email", name="email")
-        label(for="password") Password 
-        input#password(type="password", name="password")
-        .flex 
-            button.mx-auto(type="submit") login
+    .m-2(class='sm:w-2/3 mx-16 lg:w-62 mx-auto my-16 bg-gray-100 shadow-xl rounded') 
+        form.grid.gap-2.p-2.mb-8(action="/user/auth/login", method='POST')
+            label(for="email") Email 
+            input.border.border-black.rounded.bg-white.px-4.py-2#email(type="email", name="email")
+            label(for="password") Password 
+            input.border.border-black.rounded.px-4.py-2#password(type="password", name="password")
+            .flex 
+                button.mx-auto.bg-red-400.text-white.px-4.py-2.rounded(type="submit") login
 
-    div.text-center(class='w-1/2')= error 
+        .p-4.grid  
+            p.mb-8.text-center.font-extrabold OR
+
+            a#googleAuth.mx-auto.px-4.py-2.my-4.text-white.bg-blue-400.rounded(href="#google")  login with Google 
+
+
+#error.text-center(class='w-1/2')= error 

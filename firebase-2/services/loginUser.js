@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
             console.log('login successful')
             //  if user has correct 
             res.send({login: true});
-            // res.render('/app');
         }
         catch (e) {
             console.log(e);

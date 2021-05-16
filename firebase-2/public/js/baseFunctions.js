@@ -8,32 +8,33 @@ export const createUserAccount = (data) => {
 
 
 
-export const makeRequest = (url, method) => {
-    let token = firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-        if (method === 'get')
-            return makeGetReq(url, token);
+export const makeRequest = (url, method, data, fn) => {
+
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        if (method == 'get')
+            return makeGetReq(url, idToken, fn);
         else
-            return makePostReq(url, idToken);
+            return makePostReq(url, data, idToken, fn);
     });
 }
 
 
-const makePostReq = async (url, token) => {
-    
-    return axios.post(url, {}, {
+const makePostReq = async (url, data, token, fn) => {
+   
+    return axios.post(url, data, {
         headers: { 'Authorization': `Bearer ${token}` } 
     }).then(res => res.data)
-      .then(data => console.log(data))
+      .then(stuff => fn(stuff))
       .catch(err => console.log(err));
 }
 
 
 
-const makeGetReq = async (url, token) => {
+const makeGetReq = async (url, token, fn) => {
 
-    return axios.get(url, {}, {
+    return axios.get(url, {
         headers: { 'Authorization': `Bearer ${token}` } 
     }).then(res => res.data)
-      .then(data => console.log(data))
+      .then(data => fn(data))
       .catch(err => console.log(err));
 }

@@ -1,6 +1,14 @@
 extends layout 
 
+block files 
+    script(src="/static/js/index.js", defer, type='module') 
+
 block content 
 
-    h1.text-center.font-xl.p-8.font-extrabold  This is index page
-    p1.text-center.font-lg.p4   only authenticated user can visit this page.
+    div.text-center
+        h1.font-xl.p-8.font-extrabold  This is index page
+        p1.font-lg.p4   only authenticated user can visit this page.
+
+    #data.border.border-black.p-4.mx-auto.my-8(class='sm:w-2/3')
+        h1.text-center data for authorized users only 
+
