@@ -13,9 +13,6 @@ firebase.auth().onAuthStateChanged((user) => {
         logoutbtn.hidden = false;
         adminbtn.hidden = false
 
-        if (user.displayName != null)
-            currentUser.innerText = user.displayName;
-
 
     } else {
       // User is signed out
@@ -43,3 +40,11 @@ logoutbtn.onclick = e => {
     });
 }
 
+
+let $ = id => {
+    return document.getElementById(id);
+}
+
+let $$ = cls => {
+    return document.querySelectorAll(`.${cls}`);
+}

@@ -1,24 +1,75 @@
 import { makeRequest } from '/static/js/baseFunctions.js'
 
-let dataElement = document.querySelector('#data');
 
+//  communicate to backend api and hense database at some point
 const addDataToDom = data => {
-    let newElem = document.createElement('p');
+    
+    data.endpoints.forEach(endpoint => {
+        let li = document.createElement('li');
+        let a = document.createElement('a');
 
-    newElem.innerText = data.message;
+        a.href = endpoint;
+        a.innerText = endpoint;
+        a.classList += 'endpoint min-w-36 text-blue-500 mx-auto px-2 py-1 rounded bg-gray-100 tracking-widest';
+        li.appendChild(a);
+        //  attach listener
+        attachListener(a);
+        $('data').appendChild(li);
+    });
+}
 
-    newElem.classList += 'text-center text-blue-500';
+//  load data from user metadata and push it to DOM
+const displayUserData = (user) => {
+    $('userName').innerText = user.displayName;
+    if (user.photoURL)
+        $('userImg').src = user.photoURL;
+    if(user.emailVerified) {
+        $('verified').innerText = 'Yes'
+        $('verified').style.color = 'green'
+    }
+    else {
+        $('verified').innerText = 'No'
+        $('verified').style.color = 'red'
+    }
+}
 
-    dataElement.appendChild(newElem);
+function appendToResponse(resData) {
+
+    let resDiv = $('response');
+    resDiv.innerText = '';
+            
+    let data = document.createElement('p');
+
+    data.classList += 'font-thin whitespace-pre-wrap tracking-widest';
+    data.innerText = resData;
+
+    resDiv.appendChild(resDiv);
+
 }
 
 
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
         // User is signed in.
         //    get data from secured api
-        makeRequest('/api/', 'get', {}, addDataToDom);
+        await makeRequest('/api/endpoints', 'get', {}, addDataToDom);
+        
+        //  display user data
+        displayUserData(user);
+
     }
-  });
+});
+
+
+
+
+const attachListener = a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+
+        makeRequest(a.href, 'get', appendToResponse);
+    });
+}
+
 
 

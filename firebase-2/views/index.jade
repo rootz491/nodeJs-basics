@@ -5,10 +5,27 @@ block files
 
 block content 
 
-    div.text-center
-        h1.font-xl.p-8.font-extrabold  This is index page
-        p1.font-lg.p4   only authenticated user can visit this page.
+    div(class='mx-auto sm:w-5/4 grid md:grid-cols-2 grid-cols-1 gap-8')
+        div(class='w-1/2 m-auto border border-black rounded')
+            img#userImg.w-full.mx-auto.rounded(src="/static/img/fool.jpeg", alt="default img")
+        
+        #userDetail.p-4(class='w-full mx-auto space-y-4')
+            .flex.justify-between.justify-items-start
+                p User Name
+                p#userName.font-bold - 
+            .flex.justify-between.justify-items-start 
+                p Account Verified 
+                p#verified.font-bold No
+            .grid.gap-2.text-center(class='grid-cols-1 md:grid-cols-2')
+                a.mx-autopx-4.py-1.px-4.text-white.bg-red-300.rounded#passwordReset(href="#") Password reset 
+                a.mx-autopx-4.py-1.px-4.text-white.bg-blue-300.rounded#emailVerification(href="#") Email Verification 
 
-    #data.border.border-black.p-4.mx-auto.my-8(class='sm:w-2/3')
-        h1.text-center data for authorized users only 
+    .border.border-black.p-4.mx-auto.my-8(class='w-4/5 sm:w-2/3')
+        ul#data.space-y-2 
+            h1.text-center list of API endpoints you can access with your current permissions 
 
+        .m-4.w-full.border.border.mx-auto 
+        .px-4.py-2.bg-gray-100.max-h-full
+            p.text-gray-500.mb-4 response
+            #response {}
+        

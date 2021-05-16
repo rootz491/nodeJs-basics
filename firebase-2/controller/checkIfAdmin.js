@@ -5,7 +5,6 @@ const getAuthToken = (req, res, next) => {
         req.authToken = req.headers.authorization.split(' ')[1];
     else
         req.authToken = null;
-    console.log('admin hit');
     next();
 };
 
@@ -18,6 +17,7 @@ module.exports = (req, res, next) => {
                 .verifyIdToken(authToken);
 
             if (userInfo.admin === true) {
+                req.user = userInfo;
                 req.authId = userInfo.uid;
                 return next();
             }
