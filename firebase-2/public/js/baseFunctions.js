@@ -1,7 +1,7 @@
 //  create account
 
 export const createUserAccount = (data) => {
-    return axios.post('/user/auth/signup', data)
+    return axios.post('/auth/signup', data)
         .then(res => res.data);
 }
 

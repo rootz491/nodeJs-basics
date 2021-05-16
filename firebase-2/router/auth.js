@@ -3,18 +3,18 @@ const createUser = require('../services/createUser');
 const loginUser = require('../services/loginUser');
 
 //  sign up
-route.get('/auth/signup', (req, res) => {
-    res.render('signup');
+route.get('/signup', (req, res) => {
+    res.render('signup', { title: 'create new user'});
 });
 
-route.post('/auth/signup', createUser);
+route.post('/signup', createUser);
 
 //  login
-route.get('/auth/login', (req, res) => {
-    res.render('login');
+route.get('/login', (req, res) => {
+    res.render('login', { title: 'welcome back' });
 });
 
-route.post('/auth/login', loginUser);
+route.post('/login', loginUser);
 
 
 

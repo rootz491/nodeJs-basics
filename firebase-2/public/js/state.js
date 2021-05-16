@@ -1,7 +1,6 @@
 let loginbtn = document.getElementById('login');
 let currentUser = document.getElementById('user');
 let logoutbtn = document.getElementById('logout');
-let appbtn = document.getElementById('app');
 let adminbtn = document.getElementById('admin');
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -12,7 +11,6 @@ firebase.auth().onAuthStateChanged((user) => {
         loginbtn.hidden = true;
         currentUser.hidden = false;
         logoutbtn.hidden = false;
-        appbtn.hidden = false;
         adminbtn.hidden = false
 
         if (user.displayName != null)
@@ -26,7 +24,6 @@ firebase.auth().onAuthStateChanged((user) => {
         loginbtn.hidden = false;
         currentUser.hidden = true;
         logoutbtn.hidden = true;
-        appbtn.hidden = true;
         adminbtn.hidden = true;
 
     }
@@ -40,7 +37,7 @@ logoutbtn.onclick = e => {
 
 
     firebase.auth().signOut().then(function() {
-        window.location = `${window.location.origin}/user/auth/login`;
+        window.location = `${window.location.origin}/auth/login`;
     }, function(error) {
         console.error('Sign Out Error', error);
     });

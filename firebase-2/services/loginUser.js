@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
             res.send({login: false});
         }
      }
-    else 
-        res.status(400).send({error: 'bad request, please check authorization header'});
+    else {
+        res.status(400);
+        next();
+    }
 }

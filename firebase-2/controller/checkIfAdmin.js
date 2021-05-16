@@ -5,27 +5,27 @@ const getAuthToken = (req, res, next) => {
         req.authToken = req.headers.authorization.split(' ')[1];
     else
         req.authToken = null;
+    console.log('admin hit');
     next();
 };
 
 module.exports = (req, res, next) => {
     getAuthToken(req, res, async () => {
         try {
-        const { authToken } = req;
-        const userInfo = await admin
-            .auth()
-            .verifyIdToken(authToken);
+            const { authToken } = req;
+            const userInfo = await admin
+                .auth()
+                .verifyIdToken(authToken);
 
-        if (userInfo.admin === true) {
-            req.authId = userInfo.uid;
-            return next();
+            if (userInfo.admin === true) {
+                req.authId = userInfo.uid;
+                return next();
+            }
+
+            throw new Error('unauthorized')
+        } catch (e) {
+            return res.status(403);
         }
-
-        throw new Error('unauthorized')
-    } catch (e) {
-        return res
-          .status(401)
-          .send({ error: 'You are not authorized to make this request' });
-    }
-  });
+    });
+    next();
 };

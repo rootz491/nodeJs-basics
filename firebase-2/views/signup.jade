@@ -2,14 +2,24 @@ extends layout
 
 block content 
 
-    form.mx-auto.grid.gap-2(action="/user/auth/signup", method='POST')
-        label(for="firstName") First Name 
-        input.px-2.py-1#firstName(type="text", name="firstName", placeholder="ex. Alex")
-        label(for="lastName") Last Name 
-        input.px-2.py-1#lastName(type="text", name="lastName", placeholder="ex. Smith")
-        label(for="email") Email 
-        input.px-2.py-1#email(type="email", name="email", placeholder="ex. alex12smith@gmail.com")
-        label(for="password") Password 
-        input.px-2.py-1#password(type="password", name="password")
-        .flex 
-            button.mx-auto(type="submit") sign up
+    #error.text-center.text-red-500.mx-auto.font-thin(class='w-1/2')= error 
+
+    .m-2(class='sm:w-2/3 lg:w-62 mx-auto p-4 my-4 bg-gray-100 shadow-xl rounded') 
+        h1.text-center.text-2xl.font-bold= title 
+        form.grid.gap-2.p-2.m-4(action="/auth/signup", method='POST')
+            label(for="firstName") First Name * 
+            input.border.border-black.rounded.bg-white.px-4.py-2(type="text", name="firstName", required)
+            label(for="lastName") Last Name *
+            input.border.border-black.rounded.bg-white.px-4.py-2(type="text", name="lastName", required)
+            label(for="photoUrl") Photo URL
+            input.border.border-black.rounded.bg-white.px-4.py-2(type="url", name="photoUrl")
+            label(for="email") Email *
+            input.border.border-black.rounded.bg-white.px-4.py-2(type="email", name="email")
+            label(for="password") Password *
+            input.border.border-black.rounded.px-4.py-2(type="password", name="password")
+            label(for="passAgain") Again Password *
+            input.border.border-black.rounded.px-4.py-2(type="password", name="passAgain")
+            .flex.justify-center.items-center.space-x-8.mt-4
+                button.bg-red-400.text-white.px-4.py-2.rounded(type="submit") sign up
+                a.text-red-300(href="/auth/login") already user? login!
+

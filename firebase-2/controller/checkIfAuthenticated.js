@@ -16,10 +16,10 @@ module.exports = (req, res, next) => {
             const{ authToken } = req;
             const userInfo = await admin.auth().verifyIdToken(authToken);
             req.authId = userInfo.uid;
-            next();
         }
         catch (e) {
-            return res.status(401);
+            res.status(401);
         }
+        next();
     })
 }

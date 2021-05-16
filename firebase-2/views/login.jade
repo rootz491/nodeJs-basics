@@ -5,19 +5,21 @@ block files
 
 block content 
 
-    .m-2(class='sm:w-2/3 mx-16 lg:w-62 mx-auto my-16 bg-gray-100 shadow-xl rounded') 
-        form.grid.gap-2.p-2.mb-8(action="/user/auth/login", method='POST')
-            label(for="email") Email 
+    .m-2(class='sm:w-2/3 lg:w-62 mx-auto p-4 my-16 bg-gray-100 shadow-xl rounded') 
+        h1.text-center.text-2xl.font-bold= title 
+        form.grid.gap-2.p-2.m-4(action="/auth/login", method='POST')
+            label(for="email") Email *
             input.border.border-black.rounded.bg-white.px-4.py-2#email(type="email", name="email")
-            label(for="password") Password 
+            label(for="password") Password *
             input.border.border-black.rounded.px-4.py-2#password(type="password", name="password")
-            .flex 
-                button.mx-auto.bg-red-400.text-white.px-4.py-2.rounded(type="submit") login
+            .flex.justify-center.items-center.space-x-8.mt-4
+                button.bg-red-400.text-white.px-4.py-2.rounded(type="submit") login
+                a.text-red-300(href="/auth/signup") signup as new user?
 
-        .p-4.grid  
-            p.mb-8.text-center.font-extrabold OR
+        .grid.space-y-4 
+            p.text-center.font-extrabold OR
 
-            a#googleAuth.mx-auto.px-4.py-2.my-4.text-white.bg-blue-400.rounded(href="#google")  login with Google 
+            a#googleAuth.mx-auto.px-4.py-2.my-2.text-white.bg-blue-400.rounded(href="#google")  login with Google 
 
 
-#error.text-center(class='w-1/2')= error 
+    #error.text-center.mx-auto(class='w-1/2')= error 
