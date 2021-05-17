@@ -4,6 +4,7 @@ const logger = require('morgan');
 const authRoute = require('./router/auth');
 const indexRoute = require('./router/index');
 const apiRoute = require('./router/api');
+const adminRoute = require('./router/admin');
 const checkIfAuthenticated = require('./controller/checkIfAuthenticated');
 const checkIfAdmin = require('./controller/checkIfAdmin');
 const cookieParser = require('cookie-parser');
@@ -25,10 +26,10 @@ app.use('/static', express.static('public'));
 
 //  main controller
 app.use('/auth', authRoute);
+app.use('/api/admin',checkIfAuthenticated, checkIfAdmin, adminRoute);
 app.use('/api', checkIfAuthenticated, apiRoute);
 app.use('/', indexRoute);
 
-//  @TODO - Handle 404
 app.use((req, res) => {
     if(res.statusCode == 403)
         res.send({ error: 'your request is missing Bearer JWTtoken' });

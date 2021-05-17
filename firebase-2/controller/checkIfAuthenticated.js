@@ -15,7 +15,6 @@ module.exports = (req, res, next) => {
         try {
             const{ authToken } = req;
             const userInfo = await admin.auth().verifyIdToken(authToken);
-            req.user = userInfo;
             req.authId = userInfo.uid;
         }
         catch (e) {

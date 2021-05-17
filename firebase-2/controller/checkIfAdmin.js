@@ -1,31 +1,18 @@
+const e = require('express');
 const admin = require('../services/firebase-service');
 
-const getAuthToken = (req, res, next) => {
-    if ( req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer' )
-        req.authToken = req.headers.authorization.split(' ')[1];
-    else
-        req.authToken = null;
-    next();
-};
-
-module.exports = (req, res, next) => {
-    getAuthToken(req, res, async () => {
-        try {
-            const { authToken } = req;
-            const userInfo = await admin
-                .auth()
-                .verifyIdToken(authToken);
-
-            if (userInfo.admin === true) {
-                req.user = userInfo;
-                req.authId = userInfo.uid;
-                return next();
-            }
-
-            throw new Error('unauthorized')
-        } catch (e) {
-            return res.status(403);
-        }
-    });
-    next();
+module.exports = async (req, res, next) => {
+        const { authToken } = req;
+        await admin
+            .auth()
+            .verifyIdToken(authToken).then((claims) => {
+                if (claims.admin === true) {
+                    res.status(200);
+                    return next();
+                }
+                else {
+                    console.log('admin false');
+                    return res.status(403).send({'message': 'current user is not admin'});
+                }
+            });
 };

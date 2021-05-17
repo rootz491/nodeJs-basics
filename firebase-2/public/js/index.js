@@ -33,20 +33,25 @@ const displayUserData = (user) => {
     }
 }
 
-function appendToResponse(resData) {
 
-    let resDiv = $('response');
-    resDiv.innerText = '';
-            
-    let data = document.createElement('p');
+//  event listener to call API endpoint
+const attachListener = a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        let resDiv = $('response');
+        resDiv.innerText = '';
 
-    data.classList += 'font-thin whitespace-pre-wrap tracking-widest';
-    data.innerText = resData;
-
-    resDiv.appendChild(resDiv);
-
+        makeRequest(a.href, 'get', {}, resData => {
+             
+            let data = document.createElement('p');
+        
+            data.classList += 'font-thin whitespace-pre-wrap tracking-widest';
+            data.innerText = JSON.stringify(resData);
+        
+            resDiv.appendChild(data);
+        });
+    });
 }
-
 
 firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
@@ -63,13 +68,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
 
 
-const attachListener = a => {
-    a.addEventListener('click', e => {
-        e.preventDefault();
-
-        makeRequest(a.href, 'get', appendToResponse);
-    });
-}
 
 
 

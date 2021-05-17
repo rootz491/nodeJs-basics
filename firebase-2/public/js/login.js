@@ -17,6 +17,8 @@ document.addEventListener('submit', e => {
         })
         .catch(err => {
             console.log(err);
+            //  add err to DOM
+            $('error').innerText = err.code;
         })
 
 });

@@ -2,6 +2,7 @@ extends layout
 
 block files 
     script(src="/static/js/index.js", defer, type='module') 
+    script(src="/static/js/admin_add_remove.js", defer, type="module") 
 
 block content 
 
@@ -17,8 +18,8 @@ block content
                 p Account Verified 
                 p#verified.font-bold No
             .grid.gap-2.text-center(class='grid-cols-1 md:grid-cols-2')
-                a.mx-autopx-4.py-1.px-4.text-white.bg-red-300.rounded#passwordReset(href="#") Password reset 
-                a.mx-autopx-4.py-1.px-4.text-white.bg-blue-300.rounded#emailVerification(href="#") Email Verification 
+                a.mx-autopx-4.py-1.px-4.text-white.bg-blue-300.rounded#adminAdd(href="#") make admin 
+                a.mx-autopx-4.py-1.px-4.text-white.bg-red-300.rounded#adminRemove(href="#") revoke admin 
 
     .border.border-black.p-4.mx-auto.my-8(class='w-4/5 sm:w-2/3')
         ul#data.space-y-2 
@@ -27,5 +28,5 @@ block content
         .m-4.w-full.border.border.mx-auto 
         .px-4.py-2.bg-gray-100.max-h-full
             p.text-gray-500.mb-4 response
-            #response {}
+            #response.truncate {}
         
