@@ -1,5 +1,6 @@
 const admin = require('../services/firebase-service');
 const makeUserAdmin = require('../services/makeUserAdmin');
+const { fetchSecret } = require('../services/database-operations');
 
 let router = require('express').Router();
 let app = require('express')();
@@ -44,13 +45,22 @@ router.get('/isAdmin', (req, res) => {
                 res.json({'admin': true});
             else
                 res.json({'admin': false});
-        });        
+        });
 });
 
 //  to make a user, Admin!
 router.post('/isAdmin', (req, res) => {
     makeUserAdmin(req, res);
 });
+
+
+//  secrets . . .
+router.get('/secrets', (req, res) => {
+    fetchSecret(req.authId, (data) => {
+        console.log(data);
+        res.json({secrets: data});
+    })
+})
 
 
 module.exports = router;

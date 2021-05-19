@@ -11,7 +11,6 @@ module.exports = async (req, res, next) => {
                     return next();
                 }
                 else {
-                    console.log('admin false');
                     return res.status(403).send({'message': 'current user is not admin'});
                 }
             });

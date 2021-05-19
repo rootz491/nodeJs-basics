@@ -14,8 +14,6 @@ router.get('/admin', (req, res) => {
     res.render('admin', {title: 'admin'});
 });
 
-router.get('/favicon.ico', (req, res) => {
-    res.sendFile('../public/img/fool.jpeg')
-})
+router.get('/favicon.ico', (req, res) => res.status(204).send('not found'));
 
 module.exports = router;

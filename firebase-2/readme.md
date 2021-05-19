@@ -20,7 +20,7 @@ implementing firebase auth and firestore with nodeJs backend server.
 
 ##  Firebase Firestore [noSQL] DB
 
-*   google provides `API` to access Cloud Firestore. here's [documentation]('https://googleapis.dev/nodejs/firestore/latest/')
+*   google provides `API` to access Cloud Firestore. here's ![documentation]('https://googleapis.dev/nodejs/firestore/latest/')
 
 ***
 

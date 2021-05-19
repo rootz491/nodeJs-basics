@@ -10,6 +10,8 @@ document.addEventListener('submit', e => {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then( _ => {
 
+            // window.location = `${window.location.origin}/app`;
+
             makeRequest('/user/auth/login', 'post', () => {
                 window.location = `${window.location.origin}/app`;
             });
