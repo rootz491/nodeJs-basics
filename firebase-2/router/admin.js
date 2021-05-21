@@ -1,5 +1,5 @@
 let router = require('express').Router();
-
+const { getAllUsers } = require('../services/firestore-service');
 
 
 router.get('/', (req, res) => {
@@ -7,7 +7,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
-    res.json({ 'users': 'list of all users' });
+    getAllUsers((users) => {
+        console.log(users);
+        res.json({ 'users': users });
+    })
 })
 
 router.post('/users', (req, res) => {

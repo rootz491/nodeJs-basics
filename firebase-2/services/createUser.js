@@ -1,5 +1,5 @@
 const admin = require('./firebase-service');
-const { registerUser } = require('./database-operations');
+const { registerUser } = require('./firestore-service');
 
 module.exports = async (req, res) => {
     const {

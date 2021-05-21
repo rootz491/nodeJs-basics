@@ -30,3 +30,11 @@ block content
             p.text-gray-500.mb-4 response
             #response.truncate {}
         
+    .border.mx-auto.p-4.my-8(class='w-2/3')
+        h1.text-center.tetx-4xl.font-bold.text-purple-300 Secret Keeper
+        form.flex.py-2(action="/api/secrets", method="post") 
+            input.w-full#secret.bg-gray-100.border.border-black.px-2(type="text", name="secret", required)
+            input.py-2.px-4(type="submit", value="push")
+
+        #secrets(class='w-5/4 mx-auto')
+            h1.font-xl.font-bold Your Secrets

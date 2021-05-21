@@ -8,17 +8,7 @@ module.exports = (req, res) => {
     admin
         .auth()
         .setCustomUserClaims(req.authId, { admin: reqAdmin })       //  req.authId is currentUser.userId, is added at `checkIfAuthorized` middleware.
-        // .then(() => {
-        //     res.json({'admin': reqAdmin});
-        // });
-    
-    //  get admin claim
-    admin
-        .auth()
-        .getUser(req.authId)
-        .then((userRecord) => {
-            // The claims can be accessed on the user record.
-            // console.log(userRecord.customClaims['admin']);
-            res.json({'admin': userRecord.customClaims['admin']});
+        .then(() => {
+            res.json({'admin': reqAdmin});
         });
 }

@@ -53,17 +53,68 @@ const attachListener = a => {
     });
 }
 
+//  get all secrets
+const addSecretsToDom = (res) => {
+    res.secrets.forEach(secret => {
+        let p = document.createElement('p')
+        let newSecret = document.createElement('a')
+        newSecret.classList = 'hover:bg-red-200 hover:text-white';
+        p.classList += ' py-2 px-1 font-thin';
+        newSecret.href = `/api/secret/delete`;
+        newSecret.innerText = '🔥   ' + secret;
+        p.appendChild(newSecret);
+        $('secrets').appendChild(p);
+        //  attaching delete listener for every secret
+        attachDeleteListener(newSecret, secret);
+    })
+}
+
+//  event listener to call API endpoint
+const attachDeleteListener = (a, secret) => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+
+        makeRequest(a.href, 'post', {secret}, res => {
+            if(res.deleted === true) {
+                //  remove a and p tag which originally container that `secret` ~
+                e.target.parentElement.remove();
+            }
+        });
+    });
+}
+
 firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
         // User is signed in.
         //    get data from secured api
         await makeRequest('/api/endpoints', 'get', {}, addDataToDom);
         
+        //  get all secrets from database through API
+        await makeRequest('/api/secrets', 'get', {}, addSecretsToDom);
+        
         //  display user data
         displayUserData(user);
 
+
     }
 });
+
+
+//  push secret
+
+document.addEventListener('submit', e => {
+    e.preventDefault();
+
+    makeRequest(e.target.action, e.target.method, {'secret': e.target.secret.value}, (res) => {
+        //  reload page
+        if(res.push === true)
+            window.location.reload();
+    });
+
+    
+})
+
+
 
 
 

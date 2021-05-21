@@ -81,7 +81,7 @@ firestore.collection('users').doc('userId3').set({
 // 	secrets: admin.firestore.FieldValue.arrayUnion('football 💜')
 // });
 
-
+//	get user info by ID
 firestore.collection('users').doc('userId3').get().then(ss => {
 	console.log(ss.data().secrets);
 })
@@ -93,6 +93,8 @@ firestore.collection('users').doc('userId3').get().then(ss => {
 // firestore.collection(`users/userId3/secrets`).add({
 // 	secret: 'I have my own s3cr3ts'
 // });
+
+
 
 
 /* i wont be using this subCollection structure to store `secrets`, instead will add array type field */
