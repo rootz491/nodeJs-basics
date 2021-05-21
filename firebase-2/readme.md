@@ -22,7 +22,13 @@ implementing firebase auth and firestore with nodeJs backend server.
 
 *   google provides `API` to access Cloud Firestore. here's ![documentation]('https://googleapis.dev/nodejs/firestore/latest/')
 
-***
+*   In this app, any user who've created an account can use `secret keeper` service.
+    *   It's basically array of name `secrets` stored at `/users/userID/` document of every user of this app.
+    *   user can create and delete secrets.
+
+*   In **Admin** page, if current user is admin;
+    *   then he can get data on all users. Data includes username, email & no. of secrets.
+
 
 ### build tailwind into project
 
@@ -32,7 +38,6 @@ $   npx tailwindcss-cli@latest build -o tailwind.css
 ```
 
 *   First comand creates file named `tailwind.config.js` which is basically configuration for classes.
-
     *   Here I'm it because it will `purge` all unwanted classes when **building** of `tailwind.css`
 
 *   second command creates file named `tailwind.css` which can be used as normal stylesheet to style webpage by linking it 😅
