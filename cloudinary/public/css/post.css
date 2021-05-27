@@ -1,0 +1,33 @@
+
+form {
+    margin: 4em auto;
+    width: 300px;
+    display: grid;
+    gap: .5em;
+}
+
+label {
+    font-weight: bolder;
+}
+
+button {
+    padding: 3px 11px;
+    background: none;
+    border: 1px solid black;
+    margin: auto;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    margin-top: 2em;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.success {
+    color: green;
+    margin-top: 2em;
+    font-weight: lighter;
+    text-align: center;
+}

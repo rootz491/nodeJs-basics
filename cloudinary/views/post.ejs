@@ -1,0 +1,24 @@
+<%- include('header'); -%>
+
+<link rel="stylesheet" href="/static/css/post.css">
+
+<h1><%= title %></h1>
+
+<form action="/post" method="post" enctype="multipart/form-data">
+
+    <label for="img">Image</label>
+    <input type="file" name="img" id="img" required>
+
+    <label for="imgName">Image Name</label>
+    <input type="text" name="imgName" id="imgName" required>
+
+    <button type="submit">post</button>
+    
+    <div class="error"><%= error %></div>
+    <div class="success"><%= success %></div>
+</form>
+
+
+
+
+<%- include('footer'); -%>
