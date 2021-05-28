@@ -5,23 +5,24 @@ let path = require('path');
 //  storage instance
 var storage = multer.diskStorage({
     destination: function (req, file, callback) { //  location to save file
-      callback(null, './uploads')
+      callback(null, './public/uploads')
     },
     filename: function (req, file, callback) {
-
-      callback(null, 'hello' + path.extname(file.originalname));
+      callback(null, file.originalname);
     }
 });
+
+var storage2 = multer.memoryStorage()
 
 
 //  obj
 module.exports = multer({
-    storage: storage,
-    // limits: {fileSize: 100000},
+    storage: storage2,
+    limits: {fileSize: 2500000},  //  2 MB max
     fileFilter: function(req, file, callback) {
         checkFileType(file, callback);
     }
-}).single('img');
+});
 
 
 

@@ -1,6 +1,6 @@
 <%- include('header'); -%>
 
-<link rel="stylesheet" href="/static/css/post.css">
+<link rel="stylesheet" href="/public/css/post.css">
 
 <h1><%= title %></h1>
 
@@ -9,8 +9,12 @@
     <label for="img">Image</label>
     <input type="file" name="img" id="img" required>
 
-    <label for="imgName">Image Name</label>
-    <input type="text" name="imgName" id="imgName" required>
+    <label for="key">Tag</label>
+    <select name="key">
+        <option value="meme">Meme</option>
+        <option value="anime">Anime</option>
+        <option value="others">Others</option>
+    </select>
 
     <button type="submit">post</button>
     

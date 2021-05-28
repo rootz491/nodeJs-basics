@@ -1,8 +1,26 @@
 <%- include('header'); -%>
 
+<link rel="stylesheet" href="/public/css/index.css">
+
 <div class="getImages">
     <h1><%= title %></h1>
     <h3>images</h3>
+    <div class="imgContainer">
+        <% data.forEach(obj => { %>
+        <a href="/image/<%= obj._id %>">
+            <div class="img">
+                <h1 class="name"><%= obj.key %></h1>
+                <img src="<%= obj.url %>" alt="">
+            </div>
+        </a>
+        <% }); %>
+        <% if(data.length === 0) { %>
+            <div class="imgDefault">
+                <h1></h1>
+                <img src="/public/img/fool.jpeg" alt="">
+            </div>
+        <% } %>
+    </div>
 </div>
 
 <%- include('footer'); -%>
