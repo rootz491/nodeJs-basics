@@ -14,9 +14,6 @@ app.use(logger('dev'));
 app.use('/public', express.static('public'));
 
 
-let imgs = []
-
-
 //  get homepage
 app.get('/', (req, res) => {
     imgModel.find({}, (err, data) => {
