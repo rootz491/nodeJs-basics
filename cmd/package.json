@@ -1,0 +1,20 @@
+{
+  "name": "cmd",
+  "version": "1.0.0",
+  "description": "learning nodejs X command line",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "cmd"
+  ],
+  "author": "n",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.14",
+    "yargs": "^11.0.0"
+  }
+}
