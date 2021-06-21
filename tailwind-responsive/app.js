@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/html', (req, res) => {
-    res.sendFile('./views/index.html')
+    res.sendFile('./views/index.html',)
 })
 
 
