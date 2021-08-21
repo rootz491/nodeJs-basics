@@ -1,0 +1,27 @@
+<div>
+
+    <div>
+        <img src="<%= user._json.avatar_url %>" alt="avatar_url">
+    </div>
+    <h1>Hii <%= user.displayName %></h1>
+    <h2>Welcome to my application</h2>
+    <p>Visit you github profile from <a href="<%= user.profileUrl %>" target="_blank">here</a>.</p>
+
+</div>
+
+
+<style>
+    div {
+        width: 70%;
+        min-height: 300px;
+        margin: 4em auto;
+        text-align: center;
+    }
+    img {
+        width: 250px;
+        border-radius: 100%;
+        margin: auto;
+        border: 1px solid #000;
+    }
+
+</style>
