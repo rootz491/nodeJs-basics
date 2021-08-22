@@ -1,0 +1,62 @@
+<%- include('header.ejs') %>
+
+    <h1>Hello World</h1>
+    
+    <p>This is csrf demo app</p>
+
+    <hr>
+
+    <h2>CSRF Attack</h2>
+
+    <p>
+        The attacker causes the victim user to carry out an action unintentionally. For example, this might be to change the email address on their account, to change their password, or to make a funds transfer.
+    </p>
+
+    <hr>
+
+    <h2>CSRF Attack Prevention</h2>
+
+    <p>
+        To protect against csrf attack, Make sure request is coming from your client and not someone who forces your client to make request.
+    </p>
+    <br>
+    <p>
+        We can achieve this via CSRF-Tokens, it's random string issued by server to it's client and make sure to check this token before parsing client's POST request.
+    </p>
+    <p>
+        This token can either be on headers / cookies or request body. <br>
+        my server checks on both places, coz it's using <strong>csurf</strong> package.
+    </p>
+    <br>
+    <p>
+        please read this package documentation for more info: <a href="https://www.npmjs.com/package/csurf">csurf package</a>
+    </p>
+
+    <hr>
+
+    <h2>This app has 3 forms</h2>
+    <ol>
+        <li>
+            <dl>
+                <dt>Simple protected POST request</dt>
+                <dd>It is protected through csrf token, server is checking for <strong>_csrf</strong> in request body here!</dd>
+                <dd>please <a href="/form">visit protected form</a> from here!</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt>Asynchoronous protected POST request</dt>
+                <dd>It is protected using csrf token, server is checking for <strong>x-csrf-token</strong> header in request headers</dd>
+                <dd>please <a href="/form/async">visit async protected form</a> from here!</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt>Simple unprotected POST request</dt>
+                <dd>It's a POST request just like first one, but it's hitting unprotected route i.e. there's no csrf protection in this POST request</dd>
+                <dd>please <a href="/form/free">visit unprotected form</a> from here!</dd>
+            </dl>
+        </li>
+    </ol>
+
+<%- include('footer.ejs') %>

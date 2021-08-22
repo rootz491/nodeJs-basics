@@ -1,0 +1,21 @@
+form {
+    padding: 2em 5px;
+    border-radius: 3px;
+    border: 2px solid black;
+    display: grid;
+    gap: .5em;
+    width: 300px;
+    justify-content: center;
+}
+
+form > input {
+    width: 100%;
+    padding: 4px 9px;
+}
+
+button {
+    width: min-content;
+    margin: auto;
+    padding: 3px 8px;
+    cursor: pointer;
+}

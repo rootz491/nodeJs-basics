@@ -1,0 +1,12 @@
+<%- include('header.ejs') %>
+<script defer src="/asyncPush.js"></script>
+<link rel="stylesheet" href="/form.css">
+
+    <form action="/api/push" method="post">
+        <input type="text" name="name" id="name" placeholder="enter your name" required>
+        <input type="number" name="age" id="age" placeholder="enter your age" required>
+        <button type="submit">post</button>
+    </form>
+
+
+<%- include('footer.ejs') %>

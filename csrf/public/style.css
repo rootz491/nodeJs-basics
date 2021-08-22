@@ -1,0 +1,49 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+h1, h2 {
+    font-family: sans-serif;
+}
+
+body {
+    line-height: 1.5em;
+    width: 80%;
+    min-height: 100vh;
+    margin: auto;
+    display: grid;
+    place-content: center;
+}
+
+hr {
+    margin: 1em 0;
+}
+
+ol {
+    margin: .5em 0;
+    display: grid;
+    gap: 1em;
+}
+
+dt {
+    font-weight: bolder;
+    letter-spacing: 1.3px;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+a {
+    padding: 2px 5px;
+    border: 1px solid black;
+    background: #000;
+    color: #fff;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        padding: 2em 0;
+    }
+}

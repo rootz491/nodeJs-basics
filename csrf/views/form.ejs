@@ -1,0 +1,12 @@
+<%- include('header.ejs') %>
+<link rel="stylesheet" href="form.css">
+
+    <form action="/api/push" method="post">
+        <input type="text" name="name" id="name" placeholder="enter your name" required>
+        <input type="number" name="age" id="age" placeholder="enter your age" required>
+        <input type="text" name="_csrf" id="_csrf" value="<%= csrf_token %>" hidden>
+        <button type="submit">post</button>
+    </form>
+
+
+<%- include('footer.ejs') %>
