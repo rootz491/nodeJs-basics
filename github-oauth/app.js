@@ -34,7 +34,9 @@ const app = express();
 
 app.set("view-engine", "ejs");
 app.use('/public', express.static(__dirname + '/public'));
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false
+}));
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
