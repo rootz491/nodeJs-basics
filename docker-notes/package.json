@@ -1,0 +1,20 @@
+{
+  "name": "docker-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "debug": "nodemon --inspect=0.0.0.0:9229 app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "ronin-database": "^0.1.1",
+    "ronin-mocks": "^0.1.6",
+    "ronin-server": "^0.1.3"
+  }
+}

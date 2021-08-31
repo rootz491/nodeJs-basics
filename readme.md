@@ -169,3 +169,68 @@ docker pull docker-id/image-name
 
 ---
 
+#	container as a database
+
+A container can be used as database like mySQL or mongodb;  
+
+But the problem is, once you stop the container; all it's runtime data gets erased. 
+To overcome this problem, docker introduced the concept of **volumes**.
+
+###	volume & network
+
+`volume`: It's a persistent memory shared b/w containers and is located on your machine, managed by docker.
+`network`: It's user defined bridge newtwork that our application and database will use to talk to each other.
+
+---
+
+Let's setup mongodb database in a container with appropriate volumes to persist it's data over multiple runs;
+
+
+*	create volumes
+	*	we'll create 2 volumes, one for data and other for configuration of MongoDB.
+
+```bash
+$ docker volume create mongodb
+$ docker volume create mongodb_config
+```
+
+*	create network, It'll let our app and mongodb container talk to each other.
+
+```bash
+$ docker newtwork create mongodb
+```
+
+*	run *MongoDB* in a container and attach to volumes and network that we've created above.
+	*	docker will pull the image from hub and run it locally.
+
+```bash
+$ docker run -it --rm -d -v mongodb:/data/db \
+  -v mongodb_config:/data/configdb \
+  -p 26016:26016 \
+  --network mongodb \
+  --name mongodb \
+  mongo
+```
+
+*	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

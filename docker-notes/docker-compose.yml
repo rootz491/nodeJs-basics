@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  docker-notes:
+    build: .
+    ports: 
+      - 80:3000
+      - 9229:9229
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://db:27017/docker-note
+    volumes:
+      - ./:/app
+    command: npm run debug
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+
+volumes:
+  mongodb:
+  mongodb_config:
