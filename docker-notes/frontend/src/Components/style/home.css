@@ -1,0 +1,22 @@
+.title {
+    font-size: 5em;
+    text-align: center;
+}
+
+.isOnline {
+    text-align: center;
+    padding: 1em 3em;
+    width: 300px;
+    margin: 2em auto;
+    border-radius: 4px;
+}
+
+#green {
+    background: rgb(177, 243, 177);
+    color: black;
+}
+
+#red {
+    background: rgb(240, 104, 104);
+    color: white;
+}

@@ -1,25 +1,59 @@
 version: '2'
 
 services:
-  docker-notes:
-    build: .
+  frontend:
+    container_name: notes_frontend
+    build: 
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    restart: always
     ports: 
       - 80:3000
-      - 9229:9229
+    volumes: 
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    links: 
+      - backend
+    command: npm start
+    networks: 
+      - notesnetwork
+
+  backend:
+    container_name: notes_backend
+    build: 
+      context: ./backend
+      dockerfile: ./Dockerfile
+    restart: always
+    ports: 
+      - 3000:3000
     environment:
       - PORT=3000
       - MONGO_URI=mongodb://db:27017/docker-note
     volumes:
-      - ./:/app
+      - ./backend:/backend
+      - /backend/node_modules
+    depends_on: 
+      - db
     command: npm run debug
+    networks: 
+      - notesnetwork
+  
   db:
+    container_name: notes_database
     image: mongo
     ports:
       - 27017:27017
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
+    restart: always
+    networks: 
+      - notesnetwork
 
 volumes:
   mongodb:
   mongodb_config:
+
+networks:
+  notesnetwork:
+    driver: bridge

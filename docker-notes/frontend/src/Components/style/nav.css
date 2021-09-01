@@ -1,0 +1,19 @@
+.noteTitle {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.nav {
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3em;
+}
+
+.navBtn {
+    padding: 4px 10px;
+    color: #fff;
+    background-color: #000;
+    border-radius: 4px;
+}

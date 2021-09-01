@@ -1,0 +1,25 @@
+.loading {
+    text-align: center;
+    margin: 3em 0;
+}
+
+.notes {
+    display: grid;
+    grid-template-columns: repeat(3, 250px);
+    gap: 1em;
+    justify-content: center;
+}
+
+.note {
+    border: 1px solid #000;
+    padding: .5em;
+}
+
+.note h3 {
+    text-align: center;
+}
+
+.note p {
+    margin-top: .5em;
+    min-height: 50px;
+}

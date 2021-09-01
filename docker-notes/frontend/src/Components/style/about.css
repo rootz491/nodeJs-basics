@@ -1,0 +1,23 @@
+.about {
+    text-align: center;
+}
+
+.about > h2 {
+    font-size: 3em;
+    margin-bottom: 1em;
+}
+
+.intro {
+    line-height: 30px;
+    font-size: 1.3em;
+}
+
+
+.ports {
+    display: grid;
+    gap: 1em;
+    width: 50%;
+    margin: 2em auto;
+    text-align: left;
+}
+
