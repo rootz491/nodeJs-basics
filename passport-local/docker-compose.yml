@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+  app:
+    build: .
+    container_name: visius-app
+    ports: 
+      - 80:3000
+    environment: 
+      - PORT=3000
+      - CONNECTIONSTRING=mongodb://db:27017/visius
+    depends_on:
+     - db
+    restart: always
+    command: npm run dev
+    networks:
+      - visiusnewtork
+
+  db:
+    image: mongo
+    container_name: visius-database
+    restart: always
+    volumes: 
+      - visius_mongodb:/data/db
+      - visius_mongodb_config:/data/configdb        
+    ports: 
+      - 27017:27017
+    networks:
+      - visiusnewtork
+
+volumes: 
+  visius_mongodb:
+  visius_mongodb_config:
+
+networks:
+  visiusnewtork:
+    driver: bridge
