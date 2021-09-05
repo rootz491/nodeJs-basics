@@ -12,6 +12,9 @@ services:
     depends_on:
      - db
     restart: always
+    volumes:
+     - .:/app
+     - /app/node_modules
     command: npm run dev
     networks:
       - visiusnewtork
@@ -31,6 +34,7 @@ services:
 volumes: 
   visius_mongodb:
   visius_mongodb_config:
+  visius_modules:
 
 networks:
   visiusnewtork:

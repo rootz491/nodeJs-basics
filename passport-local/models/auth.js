@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -20,7 +22,8 @@ const schema = mongoose.Schema({
     verified: {
         type: Boolean,
         default: false
-    }
-})
+    },
+    stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Story' }]
+});
 
-module.exports = mongoose.model('Users', schema);
+module.exports = mongoose.model('User', schema);

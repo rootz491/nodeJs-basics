@@ -2,11 +2,13 @@ const express = require("express");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
-const logger = require("multer");
+const logger = require("morgan");
 const csrf = require("csurf");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
+const apiRoutes = require("./routes/api");
 const passportConfig = require("./services/passport");
+const isAuthenticated = require("./services/auth");
 
 const app = express();
 
@@ -16,10 +18,10 @@ mongoose.connect(process.env.CONNECTIONSTRING)
     .catch(err => console.log(err));
 
 //  passport config envoke
-passportConfig();
+passportConfig(passport);
 
 //  middlewares
-app.set('views engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,9 +34,20 @@ app.use(expressSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(csrf);
+app.use(csrf());
 
 app.use('/auth', authRoutes);
+app.use('/api', isAuthenticated, apiRoutes);
+
+// error handler
+app.use(function (err, req, res, next) {
+    if (err.code === 'EBADCSRFTOKEN') {
+        // handle CSRF token errors here
+        res.status(403)   
+        res.render('error', { title: 'Bad CSRF Token', status: 403, description: 'make sure your CSRF token is valid.' });
+    }
+})
+
 
 app.listen(process.env.PORT, err => {
     if (err) console.log(err);

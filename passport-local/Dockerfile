@@ -10,4 +10,4 @@ RUN npm i
 
 COPY . .
 
-CMD ["node", "app.js"]
+CMD ["nodemon", "app.js"]
