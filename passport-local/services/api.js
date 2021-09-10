@@ -12,5 +12,14 @@ module.exports = {
             return false;
         }
         
+    },
+    gelAllStories: async () => {
+        try {
+            const stories = await Story.find()
+            return stories;
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
     }
 }
