@@ -215,7 +215,7 @@ const start = async () => {
         case 'pop':
             if(argv.type === 'animal') {    //  pop last creature from `Animal` list.
                 if (argv.id) {  //  check if `id` is passed
-                    try {
+                    try {       /* ./index.js --action pop --type animal --id 613e168ca6261851127834a0 */
                         const updatedAnimal = await Animal.findByIdAndUpdate(argv.id, { $pop: { list: 1 } });
                         if (updatedAnimal) console.log('creature is popped from your animal list!\n');
                         else console.log('Can\'t pop creature from animal list, perhaps it doesn\'t exist!');
