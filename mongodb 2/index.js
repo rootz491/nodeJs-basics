@@ -71,8 +71,8 @@ const start = async () => {
                         if (argv.name) {    //  show Animal & it's creatures by 'name'
                             let animal = await Animal.findOne({ name: argv.name }).populate('list');     /* ./index.js --action show --type animal --name Dog */
                             //  show to console
-                            console.log(`name: ${animal.name}`);  //  print animal name
-                            // console.log(` data: ${animal.date}`);
+                            console.log(`id: ${animal._id}`);   //  print animal info
+                            console.log(`name: ${animal.name}`);
                             console.log('   List of animals:');
                             let creatures = animal.list;
                             creatures.length > 0 ?
@@ -82,7 +82,7 @@ const start = async () => {
                                     console.log(`\t   age: ${creature.age}`);           /* print details of each creature */
                                     console.log(`\t   color: ${creature.color}`);
                                 }) :
-                                console.log('/tNo creatuers found');
+                                console.log('\t⚠️ No creatuers found');
                         }
                         else {  //  show all animals and it's creatures
                             let animals = await Animal.find().populate('list');     /* ./index.js --action show --type animal */
@@ -111,7 +111,8 @@ const start = async () => {
                         let creatures = await Creature.find().populate('animalGroup')
                         //  show to console
                         creatures.forEach((creature, i) => {    //  go thru each creature
-                            console.log(`${i}. name: ${creature.name}`);  /* print details of creature */
+                            console.log(`${i}. ID: ${creature._id}`);  /* print details of creature */
+                            console.log(`   name: ${creature.name}`);
                             console.log(`   age: ${creature.age}`);
                             console.log(`   color: ${creature.color}`);
                             console.log(`   animal type: ${creature.animalGroup.name}`);    //  print which animal this creature belongs to.
@@ -124,7 +125,6 @@ const start = async () => {
                     console.log('⚠️ choose `--type` b/w animal or creature');
             }
             break;
-
 
         case 'add':
             //  choose b/w `Animal` and `creature`
@@ -159,15 +159,86 @@ const start = async () => {
             break;
 
         case 'remove':
-            console.log('hope you\'ll it again someday');
+            //  choose b/w `Animal` and `creature`
+            switch(argv.type) {
+                case "animal":  //  remove `Animal`
+                    if (argv.name) {
+                        try {   /* ./index.js --action remove --type animal --name cat */
+                            const deletedAnimal = await Animal.findOneAndDelete({name: argv.name});
+                            if (deletedAnimal) console.log('Animal successfully deleted!');
+                            else console.log('Can\'t remove Animal, perhaps it doesn\'t exist!');
+                        } catch (error) {
+                            console.log('⚠️ Failed to delete your animal!');
+                        }
+                    }
+                    else {
+                        console.log('⚠️ specify name of animal you want to delete with `--name` flag');
+                    }
+                    break;
+                case "creature":    //  remove `Creature`
+                    if (argv.name) {
+                        try {       /* ./index.js --action remove --type creature --name carrey */
+                            const deletedCreature = await Creature.findOneAndDelete({name: argv.name});
+                            if (deletedCreature) console.log('Creature successfully deleted!');
+                            else console.log('Can\'t remove Creature, perhaps it doesn\'t exist!');
+                        } catch (error) {
+                            console.log('⚠️ Failed to create new animal!');
+                        }
+                    }
+                    else {
+                        console.log('⚠️ specify name of creature you want to delete with `--name` flag');
+                    }
+                    break;
+                default:
+                    console.log('⚠️ choose `--type` b/w animal or creature');
+            }
             break;
+
+        case 'push':
+            if(argv.type === 'animal') {    //  push to specific `Animal` list to add new `creature` into it.
+                if (argv.id && argv.creature) {  //  check if `id` is passed and `creature` is passed
+                    try {
+                        const updatedAnimal = await Animal.findByIdAndUpdate(argv.id, { $push: { list: argv.creature } });
+                        if (updatedAnimal) console.log('new creature added to your animal list!\n');
+                        else console.log('Can\'t update Animal, perhaps it doesn\'t exist!');
+                    } catch (error) {
+                        console.log('⚠️ Failed to update your animal! -> ', error.message);
+                    }
+                }
+                else {
+                    console.log('⚠️ specify animal you want to update with `--id` flag and provide id of creature you want to add with `--creature` flag');
+                }
+            }
+            else console.log('⚠️ you can only update `animal` to add new creature into animal\'s list.');
+            break;
+        
+        case 'pop':
+            if(argv.type === 'animal') {    //  pop last creature from `Animal` list.
+                if (argv.id) {  //  check if `id` is passed
+                    try {
+                        const updatedAnimal = await Animal.findByIdAndUpdate(argv.id, { $pop: { list: 1 } });
+                        if (updatedAnimal) console.log('creature is popped from your animal list!\n');
+                        else console.log('Can\'t pop creature from animal list, perhaps it doesn\'t exist!');
+                    } catch (error) {
+                        console.log('⚠️ Failed to update your animal! -> ', error.message);
+                    }
+                }
+                else {
+                    console.log('⚠️ specify animal you want to update with `--id` flag');
+                }
+            }
+            else console.log('⚠️ you can only update `animal` to remove last creature from animal\'s list.');
+            break;
+
         case 'help':
-            console.log('do it youself XD');
+            console.log('Go read source code & do it youself xD');
             break;
+
         default:
-            console.log('go fuck youself!');
+            console.log('select an action with `--action` flag.');
+
     }
-    process.exit();
+    process.exit(); //  kill process
 }
 
 
