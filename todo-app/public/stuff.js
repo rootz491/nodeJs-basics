@@ -25,6 +25,7 @@ task.addEventListener("submit", ee => {
 
     //  making dom element for newly created element
     createNewTask(value);
+    document.querySelector('#item').value = "";
 });
 
 let createNewTask = data => {
