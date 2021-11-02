@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const sql = require('mysql2');
 require('dotenv').config();
 
@@ -11,16 +12,35 @@ const config = {
 }
 
 const connection = sql.createConnection(config);
-
 connection.connect();
 
-
 const app = express();
+
+app.use(express.json());
+app.use(morgan('dev'));
 
 
 app.get('/', (_, res) => {
     try {
         connection.query('SELECT * FROM pet', function (error, results, fields) {
+            if (error) throw error;
+            res.send(results);
+        });
+    } catch (error) {
+        res.status(403).send(error);
+    }
+})
+
+app.post('/pet', (req, res) => {
+    try {
+        const {
+            name, 
+            owner, 
+            species,
+            sex
+        } = req.body;
+        
+        connection.query(`INSERT INTO pet VALUES ('${name}', '${owner}','${species}','${sex}')`, function (error, results, fields) {
             if (error) throw error;
             res.send(results);
         });

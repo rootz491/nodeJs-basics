@@ -14,6 +14,8 @@ trying to understand SQL database with code!
     CREATE DATABASE world;
     ```
 
+>   about [tables](https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html)
+
 *   create new table
     ```sql
     CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
@@ -24,4 +26,10 @@ trying to understand SQL database with code!
     ```sql
     DESCRIBE pet;
     ```
+
+---
+
+# useful stuff
+
+*   some skoop on prisma (DB ORM) and nextJS, working together: [here](https://daily.dev/blog/nextjs-with-prisma)!
 
