@@ -26,6 +26,21 @@ trying to understand SQL database with code!
     ```sql
     DESCRIBE pet;
     ```
+>   about adding [data](https://dev.mysql.com/doc/refman/8.0/en/loading-tables.html)
+
+*   add new row (data)
+    ```sql
+    INSERT INTO pet VALUES ('Puffball','Diane','hamster','f');
+    ```
+
+---
+
+##   fun
+
+`localhost:3000/pet?owner=' OR '1'='1`
+
+can get all user's pets and not only current owners!
+this is just a glims of the power of SQLi;
 
 ---
 

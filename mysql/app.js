@@ -19,7 +19,6 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
-
 app.get('/', (_, res) => {
     try {
         connection.query('SELECT * FROM pet', function (error, results, fields) {
@@ -29,7 +28,7 @@ app.get('/', (_, res) => {
     } catch (error) {
         res.status(403).send(error);
     }
-})
+});
 
 app.post('/pet', (req, res) => {
     try {
@@ -47,7 +46,19 @@ app.post('/pet', (req, res) => {
     } catch (error) {
         res.status(403).send(error);
     }
-})
+});
 
+app.get('/pet', (req, res) => {
+    try {
+        const { owner } = req.query;
+        
+        connection.query(`SELECT * FROM pet WHERE owner='${owner}'`, function (error, results, fields) {
+            if (error) throw error;
+            res.send(results);
+        });
+    } catch (error) {
+        res.status(403).send(error);
+    }
+});
 
 app.listen(3000);
