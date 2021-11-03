@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 
 app.get('/', (_, res) => {
     try {
-        connection.query('SELECT * FROM pet', function (error, results, fields) {
+        connection.query('SELECT * FROM pet', function (error, results) {
             if (error) throw error;
             res.send(results);
         });
