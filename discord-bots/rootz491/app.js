@@ -1,3 +1,12 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => res.send('I\'m actually a discord bot 😅'));
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+
+
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 require('dotenv').config();
