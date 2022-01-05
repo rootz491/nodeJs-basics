@@ -187,9 +187,11 @@ mongoose.connect(process.env.MONGO_URI_2)
         }).exec();
         */
 
+        /*
         // show all users of job
         const thatJob = await Job.findById('61699c1a9c66d94becc19624').populate('workers.user');
         thatJob.workers.forEach(u => console.log(u.user));
+        */
 
         /*  
         * get job and user, add user to job then remove other user from job.
@@ -215,6 +217,10 @@ mongoose.connect(process.env.MONGO_URI_2)
             }
         });
         */
+
+        const thatUser = await User.findOne({username: 'rootz491'});
+        const jobByThatUser = await Job.find({employer: thatUser._id});
+        console.log(jobByThatUser);
 
     } catch (error) {
         console.log(error.message);
