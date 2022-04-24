@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const sql = require('mysql2');
 require('dotenv').config();
 
-const SQL_CONNECTION_STRING = 'Server=tcp:rootz491.database.windows.net,1433;Initial Catalog=prisma-learning;Persist Security Info=False;User ID=rootz491;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;';
+const SQL_CONNECTION_STRING = `Server=tcp:rootz491.database.windows.net,1433;Initial Catalog=prisma-learning;Persist Security Info=False;User ID=rootz491;Password=${process.env.PASSWORD};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;`;
 
 const app = express();
 
@@ -20,7 +20,9 @@ const config = {
 
 // const connection = sql.createConnection(config);
 // connection.connect(x => console.log(x));
-const connection = sql.createPool(SQL_CONNECTION_STRING)
+
+const connection = sql.createPool(config)
+// console.log(connection)
 
 // mssql
 
@@ -45,4 +47,6 @@ app.get('/', (req, res) => {
     }
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
