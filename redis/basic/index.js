@@ -39,8 +39,6 @@ const { createClient } = require('redis');
       EX: 3
     })
   
-  
-  
     // * it won't set here because key3 doesn't exist
     await client.set('key3', 'hi dad!', {
       XX: true,
@@ -53,28 +51,34 @@ const { createClient } = require('redis');
   
     // * fetching after expiration will return null
     setTimeout(async () => {
-      if (client.connected) {
-        const key4 = await client.get('key4');
-        console.log('key4', key4);
-      } else {
-        console.info('can\'t perform this operation!');
+      try {
+        if (client) {
+          const key4 = await client.get('key4');
+          console.log('key4', key4);
+        } else {
+          console.info('can\'t perform this operation!');
+        }
+      } catch (error) {
+        console.log(error);
       }
     }, 4000);
 
 
+    //  ? fetch all keys
+    const keys = await client.keys('*');
+    console.log('all keys', keys);
     
-    const key1 = await client.get('key1');
-    const key2 = await client.get('key2');
-    const key3 = await client.get('key3');
+    for (const key of keys) {
+      console.log({key, value: await client.get(key)});
+    }
   
-    console.log({key1, key2, key3});
-  
-  
+    /*
     // ! deleting all keys
     await client.flushAll();
   
     // ! closing the connection
     await client.quit();
+    */
 
   } catch (error) {
     console.log(error);
