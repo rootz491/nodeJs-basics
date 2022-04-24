@@ -71,6 +71,7 @@ const { createClient } = require('redis');
     for (const key of keys) {
       console.log({key, value: await client.get(key)});
     }
+
   
     /*
     // ! deleting all keys
