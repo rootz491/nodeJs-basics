@@ -1,10 +1,12 @@
 const { createClient } = require('redis');
+require('dotenv').config();
 
 (async () => {
   try {
 
     const client = createClient({
-      url: 'redis://localhost:6379'
+      url: process.env.REDIS_URL || 'redis://localhost:6379',
+      password: process.env.REDIS_PWD || ''
     });
   
     /*
