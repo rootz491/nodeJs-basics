@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
     //  Send a message to the queue
     //  * Message is byte array.
     channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)));
-    console.log(" [x] RabbitMQ -> Sent %s", message);
+    console.log(" [x] RabbitMQ -> Sent %s", payload);
     res.send('message sent');
   } catch (error) {
     console.log(error);
