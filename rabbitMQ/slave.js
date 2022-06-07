@@ -23,7 +23,8 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     channel.consume(
       queue, 
       function(msg) {
-        console.log(" [x] Received %s", msg.content.toString());
+        const payload = JSON.parse(msg.content.toString());
+        console.log(" [x] Received: sender = %s, message = %s ", payload.sender, payload.message);
       }, 
       { noAck: true }
     );

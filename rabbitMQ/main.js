@@ -12,7 +12,10 @@ app.get('/', async (req, res) => {
     const channel = await connection.createChannel();
   
     const queue = 'hello';
-    const message = req.query.message;
+    const payload = {
+      message: req.query.message,
+      sender: 'main'
+    };
   
     //  Create a queue inside channel
     //  * Queue is idempotent.
@@ -22,7 +25,7 @@ app.get('/', async (req, res) => {
   
     //  Send a message to the queue
     //  * Message is byte array.
-    channel.sendToQueue(queue, Buffer.from(message));
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)));
     console.log(" [x] RabbitMQ -> Sent %s", message);
     res.send('message sent');
   } catch (error) {
