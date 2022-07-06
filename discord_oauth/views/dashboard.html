@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="/js/dashboard.js" defer></script>
+		<title>Dashboard</title>
+	</head>
+	<body>
+		<style>
+			#header {
+				display: flex;
+				flex-direction: row-reverse;
+			}
+			#header button {
+				color: white;
+				background-color: purple;
+				padding: 5px 12px;
+				outline: none;
+				border: none;
+				border-radius: 3px;
+			}
+			#me {
+				font-size: 30px;
+			}
+		</style>
+		<div id="header">
+			<button id="logout">logout</button>
+		</div>
+		<div>
+			<h1>Dashboard</h1>
+			<p id="me"></p>
+		</div>
+	</body>
+</html>

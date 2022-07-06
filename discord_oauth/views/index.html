@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>welcome</title>
+	</head>
+	<body>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			#container {
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
+			#container > div:first-child {
+				padding: 2em;
+				text-align: center;
+			}
+			#main {
+				flex: 1;
+				display: grid;
+				place-content: center;
+				gap: 2em;
+			}
+			#main h3 {
+				font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+				font-size: 24px;
+				margin-bottom: 2em;
+			}
+			#main > div > div {
+				display: flex;
+				flex-direction: column;
+				margin: 1em 0;
+			}
+			#main a {
+				color: white;
+				background-color: purple;
+				border-radius: 3px;
+				font-size: 15px;
+				text-decoration: none;
+				padding: 5px 14px;
+				margin: auto;
+			}
+			#main > div p {
+				text-align: center;
+			}
+		</style>
+		<div id="container">
+			<div><h1>Hello World</h1></div>
+			<div id="main">
+				<div>
+					<h3>authorize yourself with discord!</h3>
+					<div>
+						<p>Authorisation Code Grant</p>
+						<a
+							target="_blank"
+							href="https://discord.com/oauth2/authorize?response_type=code&client_id=993997262881562775&scope=identify&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Ftoken&prompt=consent"
+							>sign in with discord</a
+						>
+					</div>
+					<div>
+						<p>Implicit Grant</p>
+						<a
+							target="_blank"
+							href="https://discord.com/api/oauth2/authorize?response_type=token&client_id=993997262881562775&scope=identify"
+							>sign in with discord</a
+						>
+					</div>
+				</div>
+			</div>
+			<div><small>made with ❤️ by @rootz491</small></div>
+		</div>
+	</body>
+</html>
