@@ -74,7 +74,6 @@ app.get("/token", async (req, res) => {
 app.get("/me", async (req, res) => {
 	try {
 		const token = req.headers.token;
-		console.log({ token });
 		const discordRes = await axios({
 			url: "https://discord.com/api/oauth2/@me",
 			headers: {
