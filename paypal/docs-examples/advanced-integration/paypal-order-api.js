@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const { CLIENT_ID, APP_SECRET } = process.env;
 const base = "https://api-m.sandbox.paypal.com";
 
-// call the create order method
+// create order
 export async function createOrder() {
 	const purchaseAmount = "100.00"; // TODO: pull prices from a database
 	const accessToken = await generateAccessToken();
@@ -38,6 +38,7 @@ export async function createOrder() {
 	return handleResponse(response);
 }
 
+// get order details
 export async function getOrderDetails(orderID) {
 	const accessToken = await generateAccessToken();
 	const url = "https://api.sandbox.paypal.com/v2/checkout/orders/" + orderID;
@@ -61,7 +62,6 @@ export async function capturePayment(orderId) {
 			Authorization: `Bearer ${accessToken}`,
 		},
 	});
-
 	return handleResponse(response);
 }
 
@@ -100,20 +100,6 @@ export async function verifyWebhook(req) {
 	return handleResponse(response);
 }
 
-// generate access token
-export async function generateAccessToken() {
-	const auth = Buffer.from(CLIENT_ID + ":" + APP_SECRET).toString("base64");
-	const response = await fetch(`${base}/v1/oauth2/token`, {
-		method: "post",
-		body: "grant_type=client_credentials",
-		headers: {
-			Authorization: `Basic ${auth}`,
-		},
-	});
-	const jsonData = await handleResponse(response);
-	return jsonData.access_token;
-}
-
 // generate client token
 export async function generateClientToken() {
 	const accessToken = await generateAccessToken();
@@ -129,9 +115,28 @@ export async function generateClientToken() {
 	return jsonData.client_token;
 }
 
-async function handleResponse(response) {
+// generate access token
+export async function generateAccessToken() {
+	const auth = Buffer.from(CLIENT_ID + ":" + APP_SECRET).toString("base64");
+	const response = await fetch(`${base}/v1/oauth2/token`, {
+		method: "post",
+		body: "grant_type=client_credentials",
+		headers: {
+			Authorization: `Basic ${auth}`,
+		},
+	});
+	const jsonData = await handleResponse(response);
+	return jsonData.access_token;
+}
+
+export async function handleResponse(response) {
 	if (response.status === 200 || response.status === 201) {
 		return response.json();
+	}
+
+	//!	DELETE -> "no content"
+	if (response.status === 204) {
+		return true;
 	}
 
 	const errorMessage = await response.text();
