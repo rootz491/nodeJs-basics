@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv/config.js";
 import morgan from "morgan";
 import express from "express";
 import * as paypalOrder from "./paypal-order-api.js";
